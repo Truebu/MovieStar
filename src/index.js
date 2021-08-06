@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 import { MoviestarApp } from './MoviestarApp';
 
 ReactDOM.render(
-    <MoviestarApp />,
+  <MoviestarApp />,
   document.getElementById('root')
 );
