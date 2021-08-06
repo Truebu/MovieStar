@@ -9,7 +9,7 @@ export const DashBoardRoutes = () => {
       <div>
         <Switch>
           <Route exact path="" component={ '' }/>
-          
+
           <Redirect to=""/>
         </Switch>
       </div>
