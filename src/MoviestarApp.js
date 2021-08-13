@@ -1,24 +1,15 @@
-import React, { useEffect, useReducer } from 'react'
+import React from 'react';
 import { AppRouter } from './routes/AppRouter';
-import { AuthContext } from './auth/AuthContext';
-import { authReducer } from './auth/authReducer';
 
-
-const init = () => {
-  return JSON.parse(localStorage.getItem('user')) || { logged: false };
-}
+// imports
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 export const MoviestarApp = () => {
-
-  const [user, dispatch] = useReducer(authReducer, {}, init)
-
-  useEffect(() => {
-    localStorage.setItem( 'user', JSON.stringify(user) );
-  }, [user])
   
   return (
-    <AuthContext.Provider value = {{user, dispatch}}>
+    <Provider store = { store }>
       <AppRouter />
-    </AuthContext.Provider>
+    </Provider>
   )
 }
