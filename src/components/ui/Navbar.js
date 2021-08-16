@@ -5,7 +5,7 @@ export const Navbar = () => {
   const history = useHistory();
 
   const handleLogout = () => {
-    history.replace("/login");
+    history.replace("/auth/login");
   };
 
   return (

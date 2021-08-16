@@ -2,7 +2,7 @@ import { types } from "../types/types"
 
 
 export const login = (uid, displayName) => ({
-    types: types.login,
+    type: types.login,
     payload: {
       uid,
       displayName

@@ -19,11 +19,11 @@ export const AppRouter = () => {
     <Router>
       <div>
         <Switch>
-          <Route
-             exact
-             path="/login" 
-             component={ LoginScreen }
-          />
+            <Route
+              exact
+              path="/auth/login" 
+              component={ LoginScreen }
+            />
 
           <Route
             path="/" 

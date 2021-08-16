@@ -16,9 +16,10 @@ export const LoginScreen = () => {
 
   const {email, password} = formValues;
 
+
   const handleLogin = (e) => {
     e.preventDefault()
-    dispatch( login() )
+    dispatch( login(email, password) )
   }
 
   return (
