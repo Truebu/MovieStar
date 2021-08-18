@@ -24,6 +24,7 @@ export const LoginScreen = () => {
 
   return (
     <div>
+      <h3 className="auth__title">Login</h3>
       <form onSubmit = { handleLogin }>
         <input
           type="text"

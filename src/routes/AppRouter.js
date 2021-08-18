@@ -5,7 +5,7 @@ import {
   Switch
 } from 'react-router-dom'
 
-import { LoginScreen } from '../components/auth/LoginScreen';
+import { AuthRouter } from './AuthRouter';
 
 /* import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute'; */
@@ -20,9 +20,8 @@ export const AppRouter = () => {
       <div>
         <Switch>
             <Route
-              exact
-              path="/auth/login" 
-              component={ LoginScreen }
+              path="/auth" 
+              component={ AuthRouter }
             />
 
           <Route
