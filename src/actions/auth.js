@@ -1,10 +1,27 @@
 import { types } from "../types/types"
+import { firebase, googleAuthProvider } from '../firebase/firebase-config';
 
 export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {
-    setTimeout(() => {
-      dispatch( login(123, 'pepe') )
-    }, 2500);
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then( async ({ user }) => {
+        await dispatch( login( user.uid, user.displayName ) )
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+}
+
+export const singInWithGoogle = () => {
+  return (dispatch) => {
+    firebase.auth().signInWithPopup( googleAuthProvider )
+      .then( ({user}) => {
+        dispatch( login(user.uid, user.displayName) )
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }
 }
 
