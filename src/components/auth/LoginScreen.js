@@ -19,6 +19,7 @@ export const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
+    dispatch( startLoginEmailPassword( email, password ) )
   }
 
   const handleGoogleLogin = () => {
@@ -71,7 +72,7 @@ export const LoginScreen = () => {
           </div>
         </div>
         <Link 
-          to="/auth/register"
+          to="/public/auth/register"
           className="link"
         >
           Create new account    

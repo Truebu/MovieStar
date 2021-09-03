@@ -1,14 +1,18 @@
 import { types } from "../types/types"
 import { firebase, googleAuthProvider } from '../firebase/firebase-config';
 
+/**
+ * Login Process 
+ */
+
 export const startLoginEmailPassword = (email, password) => {
   return (dispatch) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then( async ({ user }) => {
-        await dispatch( login( user.uid, user.displayName ) )
+      .then( ({ user }) => {
+        dispatch( login( user.uid, user.displayName ) )
       })
       .catch((e) => {
-        console.log(e)
+        console.log(e.message)
       })
   }
 }
@@ -33,3 +37,21 @@ export const login = (uid, displayName) => ({
     }
   }
 )
+
+/**
+ * Register Process
+ */
+
+/**
+ * Logout Process
+ */
+ export const startLogout = () => {
+  return async( dispatch ) => {
+      await firebase.auth().signOut();
+      dispatch( logout() );
+  }
+}
+
+export const logout = () => ({
+  type: types.logout
+})
