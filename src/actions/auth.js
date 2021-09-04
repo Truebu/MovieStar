@@ -1,5 +1,6 @@
 import { types } from "../types/types"
 import { firebase, googleAuthProvider } from '../firebase/firebase-config';
+import { setError } from "./ui";
 
 /**
  * Login Process 
@@ -11,8 +12,9 @@ export const startLoginEmailPassword = (email, password) => {
       .then( ({ user }) => {
         dispatch( login( user.uid, user.displayName ) )
       })
-      .catch((e) => {
-        console.log(e.message)
+      .catch(({ message }) => {
+        message = "Credenciales incorrectas"
+        dispatch( setError(message) )
       })
   }
 }
