@@ -8,11 +8,9 @@ import { finishLoading, removeError, setError, startLoading } from '../../action
 import { handleFormRegister } from '../../helpers/handleFormValid';
 
 export const RegisterScreen = () => {
-
+  
   const dispatch = useDispatch()
-  
   const {msgError, loading} = useSelector(state => state.ui) 
-  
   const [formValues, handleInputChange] = useForm({
     name: '',
     email: '',
@@ -21,10 +19,15 @@ export const RegisterScreen = () => {
   })
   const {name, email, password, passwordConfirm} = formValues;
   
-  const validate = handleFormRegister(name, email, password, passwordConfirm)
+  console.log('object')
   
   const handleRegister = (e) => {
     e.preventDefault()
+    isValidForm()
+  }
+  
+  const isValidForm = () => {
+    const validate = handleFormRegister(name, email, password, passwordConfirm)
     if (validate !== '') {
       dispatch( setError(validate))
       dispatch( startLoading() )
@@ -37,6 +40,7 @@ export const RegisterScreen = () => {
       dispatch( startRegisterEmailPassword(email, password, name) )
     }
   }
+  
 
   return (
     <>
