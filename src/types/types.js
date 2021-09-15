@@ -10,8 +10,6 @@ export const types = {
   uiStartLoading: '[UI] uiStartLoading',
   uiFinishLoading: '[UI] uiFinhisLoading',
 
-  apiHome: '[API] formatHome',
-  apiSearchMovie: '[API] searchMovie',
-  apiFilterSearch: '[API] filterSearch'
-
+  api: '[API] ImdMovie',
+  apiReload: '[API] Reload'
 }

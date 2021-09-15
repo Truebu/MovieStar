@@ -1,24 +1,22 @@
 import { types } from "../types/types";
 
-export const apiReducer = (state = {}, action) => {
+const initialState = {
+  data: []
+}
+
+export const apiReducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case types.apiHome:
+    case types.api:
       return {
-        
+        ...state,
+        data: action.payload
+      }
+    case types.apiReload:
+      return {
+        data: []
       }
 
-/*  case types.apiHome:
-      return {
-
-      }
-
-    case types.apiHome:
-      return {
-
-      }
-*/
-  
     default:
       return state
   }
