@@ -1,19 +1,9 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react";
 
-
-export const useUrl = ( url = '/movie/popular', params = {}) => {
-  const [state, setState] = useState({data: null, loading: true, error: null})
-
-  const isMounted = useRef(true)
-  useEffect( () => {
-    return () => {
-      isMounted.current = false
-    }
-  }, [])
-
+export const useUrl = (url, params) => {
+  const [data, setData] = useState([])
   const options = {
-    method: 'GET',
     url: `https://api.themoviedb.org/3${url}`,
     params: {
       ...params,
@@ -21,29 +11,23 @@ export const useUrl = ( url = '/movie/popular', params = {}) => {
     }
   };
 
-  useEffect( () => {
-    setState({data: null, loading: true, error: null})
-    axios.request(options)
-      .then( resp => resp.data.results )
-      .then( results => {
-        if (isMounted.current) {
-          setState ({
-            loading: false,
-            error: null,
-            data: results
-          })
-        }  
-      })
-      .catch( () => { 
-        setState({
-          data: null,
-          loading: true,
-          error: 'No se pudo generar la info'
-        })
-      })
-  }, [])
-
-  return state
+  useGetApi(options, setData)
+  
 }
+
+const useGetApi = (options, setData) => {
+  useEffect( () => {
+    axios({
+      method: 'get',
+      url: options.url,
+      params: options.params
+    }).then((resp) => {
+      setData(resp.data)
+    }).catch((e) => {
+      console.log(e)
+    })
+  }, [])
+}
+
 
 

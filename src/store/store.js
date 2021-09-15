@@ -19,4 +19,3 @@ export const store = createStore(
     applyMiddleware( thunk )
   )
 )
-

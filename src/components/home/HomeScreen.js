@@ -1,13 +1,15 @@
 import React from 'react'
-import { useFetch } from '../../hooks/useFetch'
 import { useUrl } from '../../hooks/useUrl'
 import { Navbar } from '../ui/Navbar'
 import { NavGenders } from '../ui/NavGenders'
 
 export const HomeScreen = () => {
   
-  const a = useUrl()
-  console.log(a)
+  const options = useUrl('/search/movie', {
+    query: 'Avengers'
+  })
+  
+  console.log(options)
 
   return (
     <>
