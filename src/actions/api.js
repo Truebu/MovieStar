@@ -1,8 +1,10 @@
 import axios from "axios"
 import { types } from "../types/types"
+import { finishLoading, startLoading } from "./ui"
 
 export const apiMovieAsync = (url, entrieParams) => {
   return (dispatch) => {
+    dispatch( startLoading() )
     axios({
       method: 'get',
       url: `https://api.themoviedb.org/3${url}`,
@@ -12,7 +14,9 @@ export const apiMovieAsync = (url, entrieParams) => {
       }
     }).then( async (resp) => {
       await dispatch( apiMovie(resp) )
+      dispatch(finishLoading())
     }).catch((e) => {
+      dispatch(finishLoading())
       console.log(e)
     })  
   }
