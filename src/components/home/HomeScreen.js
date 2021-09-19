@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiMovieAsync, apiReload } from '../../actions/api'
-import { startLoading } from '../../actions/ui'
 import { Navbar } from '../ui/Navbar'
 import { NavGenders } from '../ui/NavGenders'
 
@@ -17,12 +16,12 @@ export const HomeScreen = () => {
   const [querys, setQuerys] = useState(initialQuery)
   const {loading} = useSelector(state => state.ui)
   
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch( apiMovieAsync( querys.url, querys.querys))
     return () => {
       dispatch( apiReload() )
     }
-  }, [dispatch, querys])
+  }, [dispatch, querys]) */
 
   if (loading) {
     return <h1>... wait</h1>
@@ -31,10 +30,12 @@ export const HomeScreen = () => {
   return (
     <>
       <div>
-        <Navbar />
+        <Navbar setQuerys={setQuerys}/>        
       </div>
       <div>
         <NavGenders setQuerys={setQuerys}/>
+      </div>
+      <div>
       </div>
       <div>
         <h1>Hello Home </h1>

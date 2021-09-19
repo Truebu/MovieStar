@@ -1,42 +1,115 @@
-import React from "react";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 
-export const Navbar = () => {
+import { startLogout } from "../../actions/auth";
+
+
+export const Navbar = ({setQuerys}) => {
+
+  const dispatch = useDispatch()
+
+
+  // Handle Search Peticion
+  const [forms, setForms] = useState("")
+  const baseUrl = '/search/movie'
+  const handleSearchChange = (e) => {
+    setForms(e.target.value)
+  }
+  const handleSearch = (e) => {
+    e.preventDefault()
+    setQuerys(newQuerys => ({
+      ...newQuerys,
+      url: baseUrl,
+      querys: {
+        query: forms
+      }
+    }))
+  }
+
+  // Handle Logout
   const history = useHistory();
-
   const handleLogout = () => {
+    dispatch(startLogout())
     history.replace("/public/auth/login");
+    // TODO: Proceso de limpiado del cartScreen
   };
 
+
+  // Handle Cart Redirect
+  const {uid} = useSelector(state => state.auth)
+  const [logged, setLogged] = useState("/public/auth/login")
+  if (!(uid === undefined)) {
+    setLogged("/private/cart")
+  }
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="/navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a className="navbar-brand" href="/">Moviestar</a>
-      <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li className="nav-item active">
-          <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/">Link</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link disabled" href="/">Disabled</a>
-        </li>
-      </ul>
-    <form className="form-inline my-2 my-lg-0">
-    <div className="row" >
-      <div className="col">
-        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="/navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a className="navbar-brand" href="/">
+          Moviestar
+        </a>
+        <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li className="nav-item active">
+            <a className="nav-link" href="/">
+              Home <span className="sr-only">(current)</span>
+            </a>
+          </li>
+          <li className="nav-item">
+            <Link
+              to={logged}
+            >
+              Cart
+            </Link>
+          </li>
+        </ul>
+        <form
+          className="form-inline my-2 my-lg-0"
+          onSubmit={handleSearch}
+        >
+          <div className="row">
+            <div className="col">
+              <input
+                className="form-control mr-sm-2"
+                placeholder="Search"
+                aria-label="Search"
+                name="search"
+                onChange = { handleSearchChange }
+              />
+            </div>
+            <div className="col">
+              <button
+                className="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+        {
+          (uid === undefined) ||
+          <div className="col">
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              onClick={handleLogout}
+            >
+              LogOut
+            </button>
+          </div>
+        }
       </div>
-      <div className="col">
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </div>
-    </div>
-    </form>
-  </div>
-</nav>
+    </nav>
   );
 };
