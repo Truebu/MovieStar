@@ -1,9 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
-export const MovieScreen = () => {
+export const MovieScreen = (movie) => {
   return (
-    <div>
-      <h1>Hello Movie</h1>
-    </div>
+    <Container>
+      <Row>
+        <Col xs={6} md={4}>
+          <Card>
+            <Card.Img variant="top" src={"https://image.tmdb.org/t/p/w500"+movie.poster_path} />
+            <Card.Body>
+              <Card.Title><b>{movie.original_title}</b></Card.Title>
+              <Button variant="primary">Go somewhere</Button>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   )
 }
