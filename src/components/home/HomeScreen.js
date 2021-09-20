@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiMovieAsync, apiReload } from '../../actions/api'
+import { MovieScreen } from '../movies/MovieScreen'
 import { Navbar } from '../ui/Navbar'
 import { NavGenders } from '../ui/NavGenders'
 
@@ -15,18 +16,20 @@ export const HomeScreen = () => {
   const dispatch = useDispatch()
   const [querys, setQuerys] = useState(initialQuery)
   const {loading} = useSelector(state => state.ui)
+  const {data} = useSelector(state => state.apiForm.data)
   
-  /* useEffect(() => {
+  
+  useEffect(() => {
     dispatch( apiMovieAsync( querys.url, querys.querys))
     return () => {
       dispatch( apiReload() )
     }
-  }, [dispatch, querys]) */
-
+  }, [dispatch, querys])
+  
   if (loading) {
     return <h1>... wait</h1>
   }
-
+  
   return (
     <>
       <div>
@@ -38,8 +41,21 @@ export const HomeScreen = () => {
       <div>
       </div>
       <div>
-        <h1>Hello Home </h1>
+        {          
+        (!loading) &&
+          <li>
+          {
+            data?.results.map(movie => (
+              <MovieScreen
+                key={movie.id}
+                {...movie}
+              />
+            ))
+          }
+          </li>
+        }
       </div>
     </>
   )
 }
+  

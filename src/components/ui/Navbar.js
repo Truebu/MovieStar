@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
 import { startLogout } from "../../actions/auth";
+
+import { firebase } from '../../firebase/firebase-config'
 
 
 export const Navbar = ({setQuerys}) => {
 
   const dispatch = useDispatch()
-
 
   // Handle Search Peticion
   const [forms, setForms] = useState("")
@@ -28,20 +29,23 @@ export const Navbar = ({setQuerys}) => {
   }
 
   // Handle Logout
-  const history = useHistory();
   const handleLogout = () => {
     dispatch(startLogout())
-    history.replace("/public/auth/login");
-    // TODO: Proceso de limpiado del cartScreen
+    // TODO: Proceso de limpiado del cartScreen (reducer)
   };
 
 
   // Handle Cart Redirect
-  const {uid} = useSelector(state => state.auth)
-  const [logged, setLogged] = useState("/public/auth/login")
-  if (!(uid === undefined)) {
-    setLogged("/private/cart")
-  }
+  const [logged, setLogged] = useState("")
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged( async(user) => {
+      if (user?.uid) {
+        setLogged("/private/cart")
+      } else {
+        setLogged("/public/auth/login")
+      }
+    })
+  }, [setLogged])
   
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -99,7 +103,7 @@ export const Navbar = ({setQuerys}) => {
           </div>
         </form>
         {
-          (uid === undefined) ||
+          !(logged === "/private/cart") ||
           <div className="col">
             <button
               className="btn btn-outline-success my-2 my-sm-0"

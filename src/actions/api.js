@@ -3,9 +3,9 @@ import { types } from "../types/types"
 import { finishLoading, startLoading } from "./ui"
 
 export const apiMovieAsync = (url, entrieParams) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch( startLoading() )
-    axios({
+    await axios ({
       method: 'get',
       url: `https://api.themoviedb.org/3${url}`,
       params: {
@@ -14,11 +14,10 @@ export const apiMovieAsync = (url, entrieParams) => {
       }
     }).then( async (resp) => {
       await dispatch( apiMovie(resp) )
-      dispatch(finishLoading())
     }).catch((e) => {
-      dispatch(finishLoading())
       console.log(e)
-    })  
+    })
+    dispatch(finishLoading())  
   }
 }
 
