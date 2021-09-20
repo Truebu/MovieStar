@@ -1,6 +1,7 @@
 import React from 'react'
+import { Nav } from 'react-bootstrap'
 
-export const NavGenders = ({setQuerys}) => {
+export const NavGenders = ({ setQuerys }) => {
 
   const baseUrl = '/discover/movie'
   const handleFilters = (e) => {
@@ -14,86 +15,42 @@ export const NavGenders = ({setQuerys}) => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <ul className="navbar-nav mr-auto">
-        <li className="nav-item active">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="28"
-          > Accion </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="12"
-          > Aventura </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="16"
-          > Animadas </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="35"
-          > Comedia </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="80"
-          > Crimen </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="27"
-          > Terror </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="18"
-          > Drama </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="14"
-          > Fantasia </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="878"
-          > Ciencia Ficcion </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="9648"
-          > Misterio </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="nav-link"
-            onClick={ handleFilters }
-            name="10749"
-          > Romance </button>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <Nav fill variant="pills" defaultActiveKey="/home">
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="28">Action</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="12">Adventure</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="16">Animated</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="35">Comedy</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="80">Crime</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="27">Horror</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="18">Drama</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="14">Fantasy</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="878">Science fiction</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="9648">Mistery</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={handleFilters} name="10749">Romance</Nav.Link>
+        </Nav.Item>
+      </Nav >
+    </>
   )
 }
