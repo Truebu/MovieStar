@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiMovieAsync, apiReload } from '../../actions/api'
+import { MovieModal } from '../movies/MovieModal'
 import { MovieScreen } from '../movies/MovieScreen'
 import { Navbar } from '../ui/Navbar'
 import { NavGenders } from '../ui/NavGenders'
@@ -55,8 +56,8 @@ export const HomeScreen = () => {
           }
           </li>
         }
+      <MovieModal />
       </div>
     </>
   )
 }
-  
