@@ -40,6 +40,7 @@ export const HomeScreen = () => {
       </div>
       <div>
       </div>
+      {/* Los estilos van aqui 🔽 */}
       <div>
         {          
         (!loading) &&

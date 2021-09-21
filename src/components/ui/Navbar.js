@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -37,12 +37,22 @@ export const Navbar = ({setQuerys}) => {
 
   // Handle Cart Redirect
   const [logged, setLogged] = useState("")
+  const isMounted = useRef(true)
+
   useEffect(() => {
-    firebase.auth().onAuthStateChanged( async(user) => {
-      if (user?.uid) {
-        setLogged("/private/cart")
-      } else {
-        setLogged("/public/auth/login")
+    return () => {
+      isMounted.current = false
+    }
+  },[])
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (isMounted.current) {        
+        if (user?.uid) {
+          setLogged("/private/cart")
+        } else {
+          setLogged("/public/auth/login")
+        }
       }
     })
   }, [setLogged])

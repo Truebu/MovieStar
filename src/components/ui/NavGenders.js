@@ -47,9 +47,7 @@ export const NavGenders = ({ setQuerys }) => {
         <Nav.Item>
           <Nav.Link onClick={handleFilters} name="9648">Mistery</Nav.Link>
         </Nav.Item>
-        <Nav.Item>
-          <Nav.Link onClick={handleFilters} name="10749">Romance</Nav.Link>
-        </Nav.Item>
+        <Nav.Item> <Nav.Link onClick={handleFilters} name="10749">Romance</Nav.Link></Nav.Item>
       </Nav >
     </>
   )
