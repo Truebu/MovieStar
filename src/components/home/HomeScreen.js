@@ -13,12 +13,13 @@ const initialQuery = {
 
 export const HomeScreen = () => {
 
-
   const dispatch = useDispatch()
   const [querys, setQuerys] = useState(initialQuery)
   const {loading} = useSelector(state => state.ui)
   const {data} = useSelector(state => state.apiForm.data)
-  
+
+  const [component, setComponent] = useState()
+
   
   useEffect(() => {
     dispatch( apiMovieAsync( querys.url, querys.querys))
@@ -27,10 +28,11 @@ export const HomeScreen = () => {
     }
   }, [dispatch, querys])
   
+  
   if (loading) {
     return <h1>... wait</h1>
   }
-  
+
   return (
     <>
       <div>
@@ -43,20 +45,24 @@ export const HomeScreen = () => {
       </div>
       {/* Los estilos van aqui 🔽 */}
       <div>
-        {          
-        (!loading) &&
-          <li>
-          {
-            data?.results.map(movie => (
-              <MovieScreen
-                key={movie.id}
-                {...movie}
-              />
-            ))
-          }
-          </li>
+        {
+          (!loading) &&
+          (data?.total_results === 0)
+          ? <div>
+              {/* componentes de Search */}
+              Tu resultado no esta en la busqueda
+            </div>
+          : <div>
+              {
+                data?.results.map(movie => (
+                  <MovieScreen
+                    key={movie.id}
+                    {...movie}
+                  />
+                ))
+              }
+            </div>          
         }
-      <MovieModal />
       </div>
     </>
   )
