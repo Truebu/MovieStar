@@ -17,9 +17,6 @@ export const HomeScreen = () => {
   const [querys, setQuerys] = useState(initialQuery)
   const {loading} = useSelector(state => state.ui)
   const {data} = useSelector(state => state.apiForm.data)
-
-  const [component, setComponent] = useState()
-
   
   useEffect(() => {
     dispatch( apiMovieAsync( querys.url, querys.querys))
