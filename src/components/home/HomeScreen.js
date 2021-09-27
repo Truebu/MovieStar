@@ -61,6 +61,9 @@ export const HomeScreen = () => {
             </div>          
         }
       </div>
+      <div>
+        <MovieModal />
+      </div>
     </>
   )
 }
