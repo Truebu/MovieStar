@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 
 import { apiReducer } from '../reducers/apiReducer';
 import { authReducer } from '../reducers/authReducer';
+import { cartReducer } from '../reducers/cartReducer';
 import { movieReducer } from '../reducers/movieReducer';
 import { uiModalReducer } from '../reducers/uiModalReducer';
 import { uiReducer } from '../reducers/uiReducer';
@@ -15,9 +16,10 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 const reducers = combineReducers ({
   auth: authReducer,
   ui: uiReducer,
+  uiModal: uiModalReducer,
   apiForm: apiReducer,
   activeMovie: movieReducer,
-  uiModal: uiModalReducer
+  cart: cartReducer,
 })
 
 export const store = createStore(

@@ -15,5 +15,13 @@ export const types = {
   apiReload: '[API] Reload',
 
   activeMovie: '[Movie] ActiveMovie',
-  inactiveMovie: '[Movie] inactiveMovie'
+  inactiveMovie: '[Movie] inactiveMovie',
+
+  cartAddMovie: '[Cart] addCartMovie',
+  cartBuyMovie: '[Cart] buyMovie',
+  cartBuyAllMovies: '[Cart] buyAllMovies',
+  cartClean: '[Cart] cleanCart'
+  // Todo: cargar el carrito
+  
+
 }
