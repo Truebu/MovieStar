@@ -4,4 +4,3 @@ export const findElementInArray = (array, find) => {
     return element.id === find
   })
 }
-

@@ -1,7 +1,7 @@
 import { types } from "../types/types"
 
 const initialState = {
-  movies: []
+  myMovies: []
 }
 
 export const userStorageReducer = (state = initialState, action) => {
@@ -14,7 +14,10 @@ export const userStorageReducer = (state = initialState, action) => {
       return {}
     
     case types.buyMovie:
-      return {}
+      return {
+        ...state,
+        myMovies: [...state.myMovies, action.payload]
+      }
 
     default:
       return state

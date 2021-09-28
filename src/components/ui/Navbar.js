@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { startLogout } from "../../actions/auth";
+import { cartClean } from "../../actions/cart";
 
 import { firebase } from '../../firebase/firebase-config'
 
@@ -31,7 +32,7 @@ export const Navbar = ({setQuerys}) => {
   // Handle Logout
   const handleLogout = () => {
     dispatch(startLogout())
-    // TODO: Proceso de limpiado del cartScreen (reducer)
+    dispatch(cartClean())
   };
 
 

@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { apiReducer } from '../reducers/apiReducer';
 import { authReducer } from '../reducers/authReducer';
 import { cartReducer } from '../reducers/cartReducer';
-import { movieReducer } from '../reducers/movieReducer';
+import { activeMovieReducer } from '../reducers/activeMovieReducer';
 import { uiModalReducer } from '../reducers/uiModalReducer';
 import { uiReducer } from '../reducers/uiReducer';
 import { userStorageReducer } from '../reducers/userStorage';
@@ -19,7 +19,7 @@ const reducers = combineReducers ({
   ui: uiReducer,
   uiModal: uiModalReducer,
   apiForm: apiReducer,
-  activeMovie: movieReducer,
+  activeMovie: activeMovieReducer,
   cart: cartReducer,
   movies: userStorageReducer,
 })

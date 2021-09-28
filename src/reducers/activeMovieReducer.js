@@ -1,7 +1,7 @@
 import { types } from "../types/types"
 
 
-export const movieReducer = (state, action) => {
+export const activeMovieReducer = (state, action) => {
 
   switch (action.type) {
     case types.activeMovie:

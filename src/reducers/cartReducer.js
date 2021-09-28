@@ -15,6 +15,9 @@ export const cartReducer = (state = initialState, action) => {
 
     case types.cartBuyAllMovies:
       return initialState
+    
+    case types.cartClean:
+      return initialState
 
     default:
       return state

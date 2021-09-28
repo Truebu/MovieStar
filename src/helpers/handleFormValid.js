@@ -1,18 +1,5 @@
-import Swal from 'sweetalert2';
 import validator from 'validator';
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3500,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
-
+import { toast } from '../features/swalMixings';
 
 export const handleFormRegister = (name, email, password, passwordConfirm) => {
   if (name.trim().length === 0) {
@@ -24,7 +11,7 @@ export const handleFormRegister = (name, email, password, passwordConfirm) => {
   } else if(password.trim().length === 0) {
     return 'Escribe una contraseña'
   } else if (!validator.isStrongPassword( password )) {
-    Toast.fire({
+    toast.fire({
       icon: 'warning',
       title: 'Ejemplo de contraseña segura: Abcd1234!'
     })

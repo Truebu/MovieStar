@@ -19,3 +19,12 @@ export const movieActive = (movieInfo) => ({
 export const inactiveMovie = () => ({
   type: types.inactiveMovie
 })
+
+export const buyMovie = (movie) => ({
+  type: types.buyMovie,
+  payload: {
+    movie,
+    isBought: true
+  }
+})
+

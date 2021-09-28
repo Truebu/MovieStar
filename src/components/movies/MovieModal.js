@@ -4,16 +4,18 @@ import { Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addMovieToCart } from "../../actions/cart";
-import { inactiveMovie } from "../../actions/movie";
+import { buyMovie, inactiveMovie } from "../../actions/movie";
 import { uiCloseModal } from "../../actions/ui";
 import { findElementInArray } from "../../helpers/findElementInArray";
 import { firebase } from '../../firebase/firebase-config'
+import { toast } from "../../features/swalMixings";
 
 export const MovieModal = () => {
   const dispatch = useDispatch()
   const {modalOpen} = useSelector(state => state.uiModal)
   const movie = useSelector(state => state.activeMovie)
   const {cart} = useSelector(state => state.cart)
+  const {myMovies} = useSelector(state => state.movies)
   const history = useHistory()
   
   const [logged, setLogged] = useState(false)
@@ -42,12 +44,15 @@ export const MovieModal = () => {
     dispatch( inactiveMovie() )
   }
 
-  const a = findElementInArray(cart, movie.id)
+  const findElementInCart = findElementInArray(cart, movie.id)
   const handleAddMovieCart = () => {
-    // TODO: compareTwoArrays() @cart @storage
+    // TODO: compareTwoArrays() @cart @storageUser
     if (logged) {
-      if(a){
-        console.log('ya tienes agregada esa peli')
+      if(findElementInCart){
+        toast.fire({
+          icon: 'warning',
+          title: 'Ya esta en tu Carrito!'
+        })
       } else {
         dispatch(addMovieToCart(movie))
         handleCloseModal()
@@ -57,8 +62,25 @@ export const MovieModal = () => {
       history.replace('/public/auth/login')
     }
   }
-  // TODO: terminar ahora con la compra
 
+  // TODO: terminar ahora con la compra
+  const findElementInPurchasing = findElementInArray(myMovies, movie.id)
+  const handleBuyMovie = () => {
+    if (logged) {
+      if(findElementInPurchasing){
+        toast.fire({
+          icon: 'warning',
+          title: 'Ya la compraste'
+        })
+      } else {
+        dispatch(buyMovie(movie))
+        handleCloseModal()
+      }
+    } else {
+      dispatch(uiCloseModal())
+      history.replace('/public/auth/login')
+    }
+  }
 
 
   return (
@@ -79,7 +101,8 @@ export const MovieModal = () => {
               Add to Cart
             </Button>
             <Button
-              variant="primary"        
+              variant="primary"
+              onClick={ handleBuyMovie }
             >
               Buy
             </Button>
