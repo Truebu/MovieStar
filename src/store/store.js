@@ -7,6 +7,7 @@ import { cartReducer } from '../reducers/cartReducer';
 import { movieReducer } from '../reducers/movieReducer';
 import { uiModalReducer } from '../reducers/uiModalReducer';
 import { uiReducer } from '../reducers/uiReducer';
+import { userStorageReducer } from '../reducers/userStorage';
 
 
 
@@ -20,6 +21,7 @@ const reducers = combineReducers ({
   apiForm: apiReducer,
   activeMovie: movieReducer,
   cart: cartReducer,
+  movies: userStorageReducer,
 })
 
 export const store = createStore(

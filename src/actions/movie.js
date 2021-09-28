@@ -19,4 +19,3 @@ export const movieActive = (movieInfo) => ({
 export const inactiveMovie = () => ({
   type: types.inactiveMovie
 })
-

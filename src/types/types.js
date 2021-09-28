@@ -16,12 +16,12 @@ export const types = {
 
   activeMovie: '[Movie] ActiveMovie',
   inactiveMovie: '[Movie] inactiveMovie',
+  buyMovie: '[Movie] Buy Movie',
 
   cartAddMovie: '[Cart] addCartMovie',
   cartBuyMovie: '[Cart] buyMovie',
   cartBuyAllMovies: '[Cart] buyAllMovies',
-  cartClean: '[Cart] cleanCart'
-  // Todo: cargar el carrito
-  
+  cartClean: '[Cart] cleanCart',
+  cartMoviesLoad: '[Cart] Load Movies', // Wait for used
 
 }
