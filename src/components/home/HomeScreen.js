@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+// import { Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiMovieAsync, apiReload } from '../../actions/api'
 import { MovieModal } from '../movies/MovieModal'
@@ -51,15 +52,15 @@ export const HomeScreen = () => {
             </div>
           : <div>
               {
-                data?.results.map(movie => (
+                data?.results.map(movie => (                  
                   <MovieScreen
                     key={movie.id}
                     {...movie}
                   />
                 ))
               }
-            </div>          
-        }
+            </div>
+        }      
       </div>
       <div>
         <MovieModal />
