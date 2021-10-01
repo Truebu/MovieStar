@@ -17,10 +17,12 @@ export const types = {
   activeMovie: '[Movie] ActiveMovie',
   inactiveMovie: '[Movie] inactiveMovie',
   buyMovie: '[Movie] Buy Movie',
-
+  moviesLoad: '[Movie] Load Movies',
+  buyAllMovies: '[Movie] buy all movies in the cart',
+  
+  buyMovieThroughCart:'[Cart] buyMovieThroughCart' ,
   cartAddMovie: '[Cart] addCartMovie',
   cartBuyMovie: '[Cart] buyMovie',
-  cartBuyAllMovies: '[Cart] buyAllMovies',
   cartClean: '[Cart] cleanCart',
   cartMoviesLoad: '[Cart] Load Movies', // Wait for used
 

@@ -11,8 +11,9 @@ export const addMovieToCart = (movie) => ({
 })
 
 // TODO: This function need, id of the movie
-export const buyMovieThroughCart = () => ({
-
+export const buyMovieThroughCart = (movieId) => ({
+  type: types.buyMovieThroughCart,
+  payload: movieId
 })
 
 export const cartClean = () => ({

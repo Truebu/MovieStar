@@ -28,3 +28,7 @@ export const buyMovie = (movie) => ({
   }
 })
 
+export const buyAllMovies = (movies) => ({ // without Implement
+  type: types.buyAllMovies,
+  payload: movies
+})

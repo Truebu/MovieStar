@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addMovieToCart } from "../../actions/cart";
+import { addMovieToCart, buyMovieThroughCart } from "../../actions/cart";
 import { buyMovie, inactiveMovie } from "../../actions/movie";
 import { uiCloseModal } from "../../actions/ui";
 import { findElementInArray } from "../../helpers/findElementInArray";
@@ -44,18 +44,25 @@ export const MovieModal = () => {
     dispatch( inactiveMovie() )
   }
 
-  const findElementInCart = findElementInArray(cart, movie.id)
   const handleAddMovieCart = () => {
-    // TODO: compareTwoArrays() @cart @storageUser
     if (logged) {
-      if(findElementInCart){
-        toast.fire({
+      const findElementInCart = findElementInArray(cart, movie.id)
+      if(!!findElementInCart){
+        return toast.fire({
           icon: 'warning',
           title: 'Ya esta en tu Carrito!'
         })
       } else {
-        dispatch(addMovieToCart(movie))
-        handleCloseModal()
+        const findElementInPurchasing = findElementInArray(myMovies, movie.id)        
+        if (!findElementInPurchasing) {
+          dispatch(addMovieToCart(movie))
+          handleCloseModal()
+        }else{
+          return toast.fire({
+            icon: 'warning',
+            title: 'Ya la adquiriste'
+          })
+        }
       }
     } else {
       dispatch(uiCloseModal())
@@ -63,16 +70,16 @@ export const MovieModal = () => {
     }
   }
 
-  // TODO: terminar ahora con la compra
-  const findElementInPurchasing = findElementInArray(myMovies, movie.id)
   const handleBuyMovie = () => {
     if (logged) {
-      if(findElementInPurchasing){
-        toast.fire({
+      const findElementInPurchasing = findElementInArray(myMovies, movie.id)
+      if(!!findElementInPurchasing){
+        return toast.fire({
           icon: 'warning',
           title: 'Ya la compraste'
         })
       } else {
+        dispatch(buyMovieThroughCart(movie.id))
         dispatch(buyMovie(movie))
         handleCloseModal()
       }

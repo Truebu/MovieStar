@@ -8,14 +8,16 @@ export const cartReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case types.cartAddMovie:
-      return {
-        ...state,
+      return {        
         cart: [...state.cart, action.payload]
       }
-
-    case types.cartBuyAllMovies:
-      return initialState
     
+    case types.buyMovieThroughCart:
+      return {
+        ...state,
+        cart: state.cart.filter(element => element.movie.id !== action.payload)
+      }
+  
     case types.cartClean:
       return initialState
 

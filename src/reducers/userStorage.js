@@ -7,18 +7,18 @@ const initialState = {
 export const userStorageReducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case types.cartBuyAllMovies:
-      return {}
-
-    case types.cartBuyMovie:
-      return {}
     
     case types.buyMovie:
       return {
         ...state,
         myMovies: [...state.myMovies, action.payload]
       }
+    
+    case types.buyAllMovies:
+      return {
 
+      }
+    
     default:
       return state
   }
