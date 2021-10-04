@@ -1,9 +1,20 @@
 import React from 'react'
 
-export const MovieCartItem = () => {
+export const MovieCartItem = ({
+  id,
+  overview,
+  popularity,
+  vote_average,
+  title,
+  poster_path,
+  release_date
+  }) => {
+  
   return (
-    <div>
-      Hello! Im item to the cart
-    </div>
+    <>
+      <div className="col-12 col-md-8">
+        {id}        
+      </div>
+    </>
   )
 }

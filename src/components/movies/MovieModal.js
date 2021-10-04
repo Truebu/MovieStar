@@ -97,8 +97,16 @@ export const MovieModal = () => {
           <Modal.Title>{movie.title} - </Modal.Title>
           <Modal.Title> Popularidad: - {movie.average}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{movie.overview}</Modal.Body>
-        <img src={`https://image.tmdb.org/t/p/w500${movie.imgPath}`} alt={movie.title}/>
+        <Modal.Body>
+          <div>
+            {movie.overview}
+          </div>
+          <div>
+            <img // Configure Styles
+              src={`https://image.tmdb.org/t/p/w500${movie.imgPath}`} alt={movie.title}              
+            />
+          </div>
+        </Modal.Body>
         <Modal.Footer>
           {movie.date}
             <Button
@@ -109,7 +117,7 @@ export const MovieModal = () => {
             </Button>
             <Button
               variant="primary"
-              onClick={ handleBuyMovie }
+              onClick={ handleBuyMovie } // Notification to Client about buy (Swal)
             >
               Buy
             </Button>

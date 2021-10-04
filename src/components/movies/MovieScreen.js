@@ -31,12 +31,11 @@ export const MovieScreen = ({
 
   return (
     <>
-    <div
-      onClick={ handleOpenMovie }
-    >
-      <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt={title}/>
-      <span>{release_date}</span>
-    </div>
+      <img        
+        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        onClick={ handleOpenMovie }
+        alt={title}
+      />
     </>
   )
 }

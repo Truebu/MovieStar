@@ -32,39 +32,38 @@ export const HomeScreen = () => {
   }
 
   return (
-    <>
-      <div>
-        <Navbar setQuerys={setQuerys}/>        
+    <div className="home_container">
+      <div className="home_navbars">
+        <div className="controler_navbar">
+          <Navbar setQuerys={setQuerys}/>
+        </div>
+        <div className="home_Genders">
+          <NavGenders setQuerys={setQuerys}/>
+        </div>
       </div>
-      <div>
-        <NavGenders setQuerys={setQuerys}/>
-      </div>
-      <div>
-      </div>
-      {/* Los estilos van aqui 🔽 */}
-      <div>
-        {
-          (!loading) &&
-          (data?.total_results === 0)
-          ? <div>
-              {/* componentes de Search */}
-              Tu resultado no esta en la busqueda
-            </div>
-          : <div>
-              {
-                data?.results.map(movie => (                  
-                  <MovieScreen
-                    key={movie.id}
-                    {...movie}
-                  />
-                ))
-              }
-            </div>
-        }      
-      </div>
+      <div className="home_container_movies">
+          {
+            (!loading) &&
+            (data?.total_results === 0)
+            ? <div>
+                {/* componentes de Search */}
+                Tu resultado no esta en la busqueda
+              </div>
+            : <div>
+                {
+                  data?.results.map(movie => (                  
+                    <MovieScreen
+                      key={movie.id}
+                      {...movie}
+                    />
+                  ))
+                }
+              </div>
+          }   
+      </div>      
       <div>
         <MovieModal />
       </div>
-    </>
+    </div>
   )
 }

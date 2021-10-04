@@ -12,29 +12,39 @@ export const CartScreen = () => {
     <Container>
       <Row>
         <Col>
-          <h1>
+          <h1 className="pt-5">
             Your Cart
           </h1>
         </Col>
       </Row>
+      <hr />
       <Row>
-        <Col>Back</Col>
-        <Col>Your Movies</Col>
-        <Col>Buy All</Col>
+        <Col>
+          <button className="btn btn-primary">
+            Regresar
+          </button>
+        </Col>
+        <Col>
+          <button className="btn btn-primary">
+            Your Movies
+          </button>
+        </Col>
+        <Col>
+          <button className="btn btn-success">
+            Buy All
+          </button>
+        </Col>
       </Row>
+      <hr />
       <Row>
         <Container>
-          <Row>
-            <Col>fdsa</Col>
-            <Col>fdsafds</Col>
-          </Row>
           <Row>
             <div>
               {
                 cart?.map(movie => (
                   <MovieCartItem
-                    key={movie.id}
-                    {...movie}
+                    key={movie.movie.id}
+                    {...movie.movie}
                   />
                 ))
               }              

@@ -15,7 +15,7 @@ export const Navbar = ({setQuerys}) => {
   // Handle Search Peticion
   const [forms, setForms] = useState("")
   const baseUrl = '/search/movie'
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e) => { // Se debe controlar cuando el user no envia nada
     setForms(e.target.value)
   }
   const handleSearch = (e) => {
