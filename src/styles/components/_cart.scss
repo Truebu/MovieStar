@@ -1,0 +1,22 @@
+
+.cart_container{
+  background: linear-gradient(140deg, #2dc9dd, $dark);
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.cart_movieItem{
+  display: grid;
+  grid-auto-rows: 120px;
+  gap: 5px
+}
+
+.cart_movie{
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.cart_image{
+  height: 120px;
+  width: 100px;
+}

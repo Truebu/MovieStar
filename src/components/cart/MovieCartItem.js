@@ -6,14 +6,26 @@ export const MovieCartItem = ({
   popularity,
   vote_average,
   title,
-  poster_path,
+  imgPath,
   release_date
   }) => {
   
   return (
     <>
-      <div className="card">
-        {id}        
+      <div className="cart_movie">
+        <div>
+          <img
+          className="cart_image"
+            src={`https://image.tmdb.org/t/p/w500${imgPath}`}
+            alt={title}            
+          />
+        </div>
+        <div>
+          {title}
+        </div>
+        <button className="btn btn-success">
+          Buy
+        </button>
       </div>
     </>
   )

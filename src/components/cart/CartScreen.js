@@ -9,6 +9,7 @@ export const CartScreen = () => {
   const {cart} = useSelector(state => state.cart)
 
   return (
+    <div className="cart_container">
     <Container>
       <Row>
         <Col>
@@ -35,23 +36,18 @@ export const CartScreen = () => {
           </button>
         </Col>
       </Row>
-      <hr />
-      <Row>
-        <Container>
-          <Row>
-            <div>
-              {
-                cart?.map(movie => (
-                  <MovieCartItem
-                    key={movie.movie.id}
-                    {...movie.movie}
-                  />
-                ))
-              }              
-            </div>
-          </Row>
-        </Container>
-      </Row>
+      <hr />      
+      <div className="cart_movieItem">
+        {
+          cart?.map(movie => (
+            <MovieCartItem
+              key={movie.movie.id}
+              {...movie.movie}
+            />
+          ))
+        }
+      </div>
     </Container>
+    </div>
   )
 }
