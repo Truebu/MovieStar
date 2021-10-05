@@ -41,25 +41,25 @@ export const HomeScreen = () => {
           <NavGenders setQuerys={setQuerys}/>
         </div>
       </div>
-      <div className="home_container_movies">
-          {
-            (!loading) &&
-            (data?.total_results === 0)
-            ? <div>
-                {/* componentes de Search */}
-                Tu resultado no esta en la busqueda
-              </div>
-            : <div>
-                {
-                  data?.results.map(movie => (                  
-                    <MovieScreen
-                      key={movie.id}
-                      {...movie}
-                    />
-                  ))
-                }
-              </div>
-          }   
+      <div className="home_container">        
+        {
+          (!loading) &&
+          (data?.total_results === 0)
+          ? <>
+              {/* componentes de Search */}
+              Tu resultado no esta en la busqueda
+            </>
+          :<div className="row-cols-4">
+              {                  
+                data?.results.map(movie => (
+                  <MovieScreen
+                    key={movie.id}
+                    {...movie}
+                  />                    
+                ))
+              }
+            </div>
+        }
       </div>      
       <div>
         <MovieModal />

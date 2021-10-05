@@ -2,21 +2,29 @@
 
 .home_container{
  display: grid;
+ grid-template-columns: 25% 25% 25% 25%;
+ grid-template-rows: auto;
 }
 
 .home_navbars{
-  gap: 1em;
-  grid-template-rows: auto;
+  grid-column: 1/5;
 }
-.controler_navbar{
+/* .controler_navbar{
   
 }
 .home_Genders{
   
 }
+ */
 
 .home_container_movies{
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows: auto;
+ grid-column: 1/5;
+ grid-row: 3/4;
+ display: grid;
+ grid-template-columns: 25% 25% 25% 25%;
+ grid-template-rows: minmax(20px, auto);
 }
 
+.home_movies {
+  width: 1/4;
+}

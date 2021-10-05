@@ -12,7 +12,7 @@ export const MovieCartItem = ({
   
   return (
     <>
-      <div className="col-12 col-md-8">
+      <div className="card">
         {id}        
       </div>
     </>

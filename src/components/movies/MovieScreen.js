@@ -31,11 +31,15 @@ export const MovieScreen = ({
 
   return (
     <>
+    <div
+      className="card"
+      onClick={ handleOpenMovie }
+    >
       <img        
         src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-        onClick={ handleOpenMovie }
         alt={title}
       />
+    </div>
     </>
   )
 }
