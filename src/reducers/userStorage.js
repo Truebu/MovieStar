@@ -16,7 +16,8 @@ export const userStorageReducer = (state = initialState, action) => {
     
     case types.buyAllMovies:
       return {
-
+        ...state,
+        myMovies: [...state.myMovies, ...action.payload]
       }
     
     default:

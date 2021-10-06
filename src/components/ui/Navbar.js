@@ -15,18 +15,22 @@ export const Navbar = ({setQuerys}) => {
   // Handle Search Peticion
   const [forms, setForms] = useState("")
   const baseUrl = '/search/movie'
-  const handleSearchChange = (e) => { // Se debe controlar cuando el user no envia nada
-    setForms(e.target.value)
+  const handleSearchChange = ({target}) => { // Se debe controlar cuando el user no envia nada
+    setForms(target.value)
   }
   const handleSearch = (e) => {
     e.preventDefault()
-    setQuerys(newQuerys => ({
-      ...newQuerys,
-      url: baseUrl,
-      querys: {
-        query: forms
-      }
-    }))
+    if (forms === '') {
+      console.log('object to Navbar') // Swal for show 'add elsewhare in your find
+    } else {
+      setQuerys(newQuerys => ({
+        ...newQuerys,
+        url: baseUrl,
+        querys: {
+          query: forms
+        }
+      }))
+    }
   }
 
   // Handle Logout
@@ -81,13 +85,13 @@ export const Navbar = ({setQuerys}) => {
               Home <span className="sr-only">(current)</span>
             </a>
           </li>
-          <li className="nav-item">
+          <span className="nav-item">
             <Link
               to={logged}
             >
               Cart
             </Link>
-          </li>
+          </span>          
         </ul>
         <form
           className="form-inline my-2 my-lg-0"
@@ -121,6 +125,11 @@ export const Navbar = ({setQuerys}) => {
               onClick={handleLogout}
             >
               LogOut
+            </button>
+            <button
+              className="btn btn-outline-success my-2 my-sm-0" // Props History para redirigir al componente Mis Peliculas              
+            >
+              Your Movies
             </button>
           </div>
         }

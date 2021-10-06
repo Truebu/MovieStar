@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { cartClean } from '../../actions/cart'
+import { buyAllMovies } from '../../actions/movie'
 
 import { MovieCartItem } from './MovieCartItem'
 
 export const CartScreen = () => {
-
+  
   const {cart} = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+
+  },[])
+
+  const handleBuyAllMovies = () => {
+    dispatch(buyAllMovies(cart))
+    dispatch(cartClean())
+  }
 
   return (
     <div className="cart_container">
@@ -31,7 +43,10 @@ export const CartScreen = () => {
           </button>
         </Col>
         <Col>
-          <button className="btn btn-success">
+          <button
+            className="btn btn-success"
+            onClick={handleBuyAllMovies} // add confirm purchased and validation when cart.lenght === 0
+          >
             Buy All
           </button>
         </Col>
