@@ -1,0 +1,22 @@
+
+.moviesUser_container{
+  background: linear-gradient(140deg, #2dc9dd, $dark);
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.moviesUser_movieItem{
+  display: grid;
+  grid-auto-rows: 120px;
+  gap: 5px
+}
+
+.moviesUser_movie{
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.moviesUser_image{
+  height: 120px;
+  width: 100px;
+}

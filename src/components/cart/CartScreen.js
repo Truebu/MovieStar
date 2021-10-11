@@ -16,6 +16,9 @@ export const CartScreen = () => {
   },[])
 
   const handleBuyAllMovies = () => {
+    for (let i = 0; i < cart.length; i++) {
+      cart[i].isBought = true;      
+    }    
     dispatch(buyAllMovies(cart))
     dispatch(cartClean())
   }
@@ -57,7 +60,7 @@ export const CartScreen = () => {
           cart?.map(movie => (
             <MovieCartItem
               key={movie.movie.id}
-              {...movie.movie}
+              {...movie}              
             />
           ))
         }

@@ -4,17 +4,7 @@ import { buyMovieThroughCart } from '../../actions/cart'
 import { buyMovie } from '../../actions/movie'
 
 export const MovieCartItem = ({
-  id,
-  overview,
-  popularity,
-  vote_average,
-  title,
-  imgPath,
-  release_date
-  }) => {
-  //
-
-  const movie = {
+  movie: {
     id,
     overview,
     popularity,
@@ -22,12 +12,24 @@ export const MovieCartItem = ({
     title,
     imgPath,
     release_date
+  },
+  isBought}) => {
+  
+  
+  const flim = {
+    id,
+    overview,
+    popularity,
+    vote_average,
+    title,
+    imgPath,
+    release_date,
   }
   const dispatch = useDispatch()
 
   const handleBuyMovie = () => {
-    dispatch(buyMovieThroughCart(movie.id))
-    dispatch(buyMovie(movie))
+    dispatch(buyMovieThroughCart(flim.id))
+    dispatch(buyMovie(flim))
   }
 
   return (
@@ -36,19 +38,22 @@ export const MovieCartItem = ({
         <div>
           <img
             className="cart_image"
-            src={`https://image.tmdb.org/t/p/w500${movie.imgPath}`}
-            alt={movie.title}
+            src={`https://image.tmdb.org/t/p/w500${flim.imgPath}`}
+            alt={flim.title}
           />
         </div>
         <div>
-          {movie.title}
+          {flim.title}
         </div>
-        <button
-          className="btn btn-success"
-          onClick={handleBuyMovie} // agregar una ventana de confirmacion
-        >
-          Buy
-        </button>
+        {
+          isBought || 
+          <button
+            className="btn btn-success"
+            onClick={handleBuyMovie} // agregar una ventana de confirmacion
+          >
+            Buy
+          </button>
+        }
       </div>
     </>
   )

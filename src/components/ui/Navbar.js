@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { startLogout } from "../../actions/auth";
 import { cartClean } from "../../actions/cart";
@@ -11,7 +11,7 @@ import { firebase } from '../../firebase/firebase-config'
 export const Navbar = ({setQuerys}) => {
 
   const dispatch = useDispatch()
-
+  const history = useHistory()
   // Handle Search Peticion
   const [forms, setForms] = useState("")
   const baseUrl = '/search/movie'
@@ -127,9 +127,10 @@ export const Navbar = ({setQuerys}) => {
               LogOut
             </button>
             <button
-              className="btn btn-outline-success my-2 my-sm-0" // Props History para redirigir al componente Mis Peliculas              
-            >
-              Your Movies
+              className="btn btn-outline-success my-2 my-sm-0" // Props History para redirigir al componente Mis Peliculas
+              onClick={ () => history.push('/private/userMovies')}
+            >            
+              Your Movies            
             </button>
           </div>
         }
