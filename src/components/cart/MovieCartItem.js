@@ -1,35 +1,33 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { buyMovieThroughCart } from '../../actions/cart'
-import { buyMovie } from '../../actions/movie'
+import { buyMoviesWithFirebase } from '../../actions/movie'
 
-export const MovieCartItem = ({
-  movie: {
+export const MovieCartItem = ({movie: {
     id,
     overview,
     popularity,
-    vote_average,
+    average,
     title,
     imgPath,
-    release_date
+    date
   },
   isBought}) => {
-  
-  
+
   const flim = {
     id,
     overview,
     popularity,
-    vote_average,
+    average,
     title,
     imgPath,
-    release_date,
+    date,
   }
   const dispatch = useDispatch()
 
   const handleBuyMovie = () => {
+    dispatch(buyMoviesWithFirebase(flim))
     dispatch(buyMovieThroughCart(flim.id))
-    dispatch(buyMovie(flim))
   }
 
   return (
@@ -49,7 +47,7 @@ export const MovieCartItem = ({
           isBought || 
           <button
             className="btn btn-success"
-            onClick={handleBuyMovie} // agregar una ventana de confirmacion
+            onClick={handleBuyMovie}
           >
             Buy
           </button>

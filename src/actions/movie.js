@@ -1,6 +1,7 @@
-import { types } from "../types/types";
-
-
+import { db } from '../firebase/firebase-config';
+import { loadMovies } from '../helpers/loadMovies';
+import { types } from '../types/types';
+import { finishLoading, startLoading } from './ui';
 
 export const movieActive = (movieInfo) => ({
   type: types.activeMovie,
@@ -15,6 +16,31 @@ export const movieActive = (movieInfo) => ({
   }
 })
 
+export const buyAllMoviesWithFirebase = () => {
+  return async (dispatch, getState) => {
+    const {cart} = getState().cart;
+    const {uid} = getState().auth;
+    dispatch(buyAllMovies(cart));
+    await cart.map(e => (
+      db.collection(`/usuarios/${uid}/peliculas`).add(e.movie)
+    ));
+  }
+}
+
+export const buyMoviesWithFirebase = (flim) => {
+  return async (dispatch, getState) => {    
+    const {uid} = getState().auth;
+    await db.collection(`/usuarios/${uid}/peliculas/`).add(flim)
+    dispatch(buyMovie(flim))
+  }
+}
+
+export const getMovies = (uid) => {
+  return async (dispatch) => {    
+    const movies = await loadMovies('peliculas', uid);    
+    dispatch(buyAllMovies(movies))    
+  }
+}
 
 export const inactiveMovie = () => ({
   type: types.inactiveMovie

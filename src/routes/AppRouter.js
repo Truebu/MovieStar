@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom'
 import { login } from '../actions/auth';
+import { getMovies } from '../actions/movie';
 
 import { firebase } from '../firebase/firebase-config'
 
@@ -31,6 +32,7 @@ export const AppRouter = () => {
         dispatch( login( user.uid, user.displayName ))
         setIsLoggedIn( true )
         // Payload more global info here -->
+        dispatch(getMovies(user?.uid))
       } else {
         setIsLoggedIn( false )
       }

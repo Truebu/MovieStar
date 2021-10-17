@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 
-import { startLogout } from "../../actions/auth";
-import { cartClean } from "../../actions/cart";
+import { startLogout } from '../../actions/auth';
+import { cartClean } from '../../actions/cart';
 
 import { firebase } from '../../firebase/firebase-config'
 
@@ -21,7 +21,7 @@ export const Navbar = ({setQuerys}) => {
   const handleSearch = (e) => {
     e.preventDefault()
     if (forms === '') {
-      console.log('object to Navbar') // Swal for show 'add elsewhare in your find
+      console.log('object to Navbar') // Swal for show add you should added elsewhare in your find
     } else {
       setQuerys(newQuerys => ({
         ...newQuerys,

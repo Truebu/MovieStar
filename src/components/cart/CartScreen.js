@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartClean } from '../../actions/cart'
-import { buyAllMovies } from '../../actions/movie'
+import { buyAllMoviesWithFirebase } from '../../actions/movie'
 
 import { MovieCartItem } from './MovieCartItem'
 
@@ -12,14 +12,14 @@ export const CartScreen = () => {
   const dispatch = useDispatch()
   
   useEffect(() => {
-
+    
   },[])
 
   const handleBuyAllMovies = () => {
     for (let i = 0; i < cart.length; i++) {
       cart[i].isBought = true;      
-    }    
-    dispatch(buyAllMovies(cart))
+    }
+    dispatch(buyAllMoviesWithFirebase())    
     dispatch(cartClean())
   }
 
