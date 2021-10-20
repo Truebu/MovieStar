@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import {MoviesPurchased} from '../user_storage/MoviesPurchased';
+import { MoviePurchased } from '../user_storage/MoviesPurchased'
 
 export const MoviesOfUser = () => {
 

@@ -7,7 +7,7 @@ import { addMovieToCart, buyMovieThroughCart } from "../../actions/cart";
 import { buyMovie, inactiveMovie } from "../../actions/movie";
 import { uiCloseModal } from "../../actions/ui";
 import { findElementInArray } from "../../helpers/findElementInArray";
-import { toast } from "../../features/swalMixings";
+
 
 export const MovieModal = () => {
   const dispatch = useDispatch()
@@ -39,49 +39,13 @@ export const MovieModal = () => {
     dispatch( inactiveMovie() )
   }
 
-  const handleAddMovieCart = () => {
-    if (logged) {
-      const findElementInCart = findElementInArray(cart, movie?.id);
-      if(!!findElementInCart){
-        return toast.fire({
-          icon: 'warning',
-          title: 'Ya esta en tu Carrito!'
-        })
-      } else {
-        const findElementInPurchasing = findElementInArray(myMovies, movie.id)        
-        if (!findElementInPurchasing) {
-          dispatch(addMovieToCart(movie))
-          handleCloseModal()
-        }else{
-          return toast.fire({
-            icon: 'warning',
-            title: 'Ya la adquiriste'
-          })
-        }
-      }
-    } else {
-      dispatch(uiCloseModal())
-      history.replace('/public/auth/login')
-    }
+  const handleAddMovieCart = (e) => {// hacer metodo por el target de los botones
+    const movieInCart = findElementInArray(cart, movie?.id, logged)
+
   }
 
   const handleBuyMovie = () => {
-    if (logged) {
-      const findElementInPurchasing = findElementInArray(myMovies, movie.id);
-      if(!!findElementInPurchasing){
-        return toast.fire({
-          icon: 'warning',
-          title: 'Ya la compraste'
-        })
-      } else {
-        dispatch(buyMovieThroughCart(movie.id))
-        dispatch(buyMovie(movie))
-        handleCloseModal()
-      }
-    } else {
-      dispatch(uiCloseModal())
-      history.replace('/public/auth/login')
-    }
+    
   }
 
 

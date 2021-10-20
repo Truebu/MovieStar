@@ -52,11 +52,9 @@ export const inactiveMovie = () => ({
 
 export const buyMovie = (movie) => ({
   type: types.buyMovie,
-  payload: {
-    movie
-  }
+  payload: movie
 })
-
+  
 export const buyAllMovies = (movies) => ({ // without Implement
   type: types.buyAllMovies,
   payload: movies
