@@ -15,7 +15,7 @@ export const cartReducer = (state = initialState, action) => {
     case types.buyMovieThroughCart:
       return {
         ...state,
-        cart: state.cart.filter(element => element.movie.id !== action.payload)
+        cart: state.cart.filter(movie => movie.id !== action.payload)
       }
   
     case types.cartClean:

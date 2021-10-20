@@ -1,12 +1,12 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import { MovieCartItem } from '../cart/MovieCartItem'
+import {MoviesPurchased} from '../user_storage/MoviesPurchased';
 
 export const MoviesOfUser = () => {
 
   const {myMovies} = useSelector(state => state.movies)
-  console.log(myMovies)
+
   return (
     <div className="cart_container">
     <Container>
@@ -30,12 +30,12 @@ export const MoviesOfUser = () => {
           </button>
         </Col>
       </Row>
-      <hr />      
+      <hr />
       <div className="moviesUser_movieItem">
         {
-          myMovies?.map(movie => (
-            <MovieCartItem
-              key = {movie?.imgPath}
+          myMovies.map(movie => (
+            <MoviePurchased
+              key = {movie.id}
               movie = {movie}
             />
           ))

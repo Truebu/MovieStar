@@ -1,15 +1,13 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { buyMovieThroughCart } from '../../actions/cart'
 import { buyMoviesWithFirebase } from '../../actions/movie'
 
-export const MovieCartItem = ({movie, isBought}) => {
+export const MovieCartItem = ({movie}) => {
 
   const dispatch = useDispatch()
 
   const handleBuyMovie = () => {
-    dispatch(buyMoviesWithFirebase(movie))
-    dispatch(buyMovieThroughCart(movie.id))
+    dispatch(buyMoviesWithFirebase(movie))    
   }
 
   return (
@@ -24,16 +22,13 @@ export const MovieCartItem = ({movie, isBought}) => {
         </div>
         <div>
           {movie.title}
-        </div>
-        {
-          isBought || 
-          <button
-            className="btn btn-success"
-            onClick={handleBuyMovie}
-          >
-            Buy
-          </button>
-        }
+        </div>        
+        <button
+          className="btn btn-success"
+          onClick={handleBuyMovie}
+        >
+          Buy
+        </button>        
       </div>
     </>
   )

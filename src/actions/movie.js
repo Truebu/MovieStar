@@ -1,6 +1,8 @@
 import { db } from '../firebase/firebase-config';
 import { loadMovies } from '../helpers/loadMovies';
 import { types } from '../types/types';
+import { finishLoading, startLoading } from './ui';
+import {buyMovieThroughCart} from './cart';
 
 export const movieActive = (movieInfo) => ({
   type: types.activeMovie,
@@ -19,8 +21,7 @@ export const buyAllMoviesWithFirebase = () => {
   return async (dispatch, getState) => {
     const {cart} = getState().cart;
     const {uid} = getState().auth;
-    dispatch(buyAllMovies(cart));
-    cart.map(e => e.movie.isBought = true)
+    dispatch(buyAllMovies(cart));    
     await cart.map(e => (
       db.collection(`/usuarios/${uid}/peliculas`).add(e.movie)
     ));
@@ -29,6 +30,7 @@ export const buyAllMoviesWithFirebase = () => {
 
 export const buyMoviesWithFirebase = (flim) => {
   return async (dispatch, getState) => {    
+    dispatch(buyMovieThroughCart(flim.id))    
     const {uid} = getState().auth;
     await db.collection(`/usuarios/${uid}/peliculas/`).add(flim)
     dispatch(buyMovie(flim))
@@ -36,9 +38,11 @@ export const buyMoviesWithFirebase = (flim) => {
 }
 
 export const getMovies = (uid) => {
-  return async (dispatch) => {    
+  return async (dispatch) => {
+    startLoading()
     const movies = await loadMovies('peliculas', uid);    
-    dispatch(buyAllMovies(movies))    
+    dispatch(buyAllMovies(movies))
+    finishLoading()
   }
 }
 
@@ -49,8 +53,7 @@ export const inactiveMovie = () => ({
 export const buyMovie = (movie) => ({
   type: types.buyMovie,
   payload: {
-    movie,
-    isBought: true
+    movie
   }
 })
 

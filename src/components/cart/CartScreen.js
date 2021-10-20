@@ -15,10 +15,7 @@ export const CartScreen = () => {
     
   },[])
 
-  const handleBuyAllMovies = () => {
-    for (let i = 0; i < cart.length; i++) {
-      cart[i].isBought = true;      
-    }
+  const handleBuyAllMovies = () => {    
     dispatch(buyAllMoviesWithFirebase())    
     dispatch(cartClean())
   }
@@ -59,8 +56,8 @@ export const CartScreen = () => {
         {
           cart?.map(movie => (
             <MovieCartItem
-              key={movie.movie.id}
-              movie = {movie.movie}
+              key={movie.id}
+              movie = {movie}
             />
           ))
         }
