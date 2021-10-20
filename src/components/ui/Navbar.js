@@ -1,16 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
 import { startLogout } from '../../actions/auth';
 import { cartClean } from '../../actions/cart';
 
-import { firebase } from '../../firebase/firebase-config'
-
-
 export const Navbar = ({setQuerys}) => {
 
   const dispatch = useDispatch()
+  const {uid} = useSelector(state => state.auth)
   const history = useHistory()
   // Handle Search Peticion
   const [forms, setForms] = useState("")
@@ -41,26 +39,21 @@ export const Navbar = ({setQuerys}) => {
 
 
   // Handle Cart Redirect
-  const [logged, setLogged] = useState("")
+  const [logged, setLogged] = useState('')
   const isMounted = useRef(true)
 
   useEffect(() => {
+    if (isMounted.current) {
+      if (uid) {
+        setLogged("/private/cart")
+      } else {
+        setLogged("/public/auth/login")
+      }
+    }
     return () => {
       isMounted.current = false
     }
-  },[])
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (isMounted.current) {        
-        if (user?.uid) {
-          setLogged("/private/cart")
-        } else {
-          setLogged("/public/auth/login")
-        }
-      }
-    })
-  }, [setLogged])
+  },[uid])
   
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">

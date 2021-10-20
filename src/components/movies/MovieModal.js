@@ -7,12 +7,12 @@ import { addMovieToCart, buyMovieThroughCart } from "../../actions/cart";
 import { buyMovie, inactiveMovie } from "../../actions/movie";
 import { uiCloseModal } from "../../actions/ui";
 import { findElementInArray } from "../../helpers/findElementInArray";
-import { firebase } from '../../firebase/firebase-config'
 import { toast } from "../../features/swalMixings";
 
 export const MovieModal = () => {
   const dispatch = useDispatch()
   const {modalOpen} = useSelector(state => state.uiModal)
+  const {uid} = useSelector(state => state.auth)
   const movie = useSelector(state => state.activeMovie)
   const {cart} = useSelector(state => state.cart)
   const {myMovies} = useSelector(state => state.movies)
@@ -22,22 +22,17 @@ export const MovieModal = () => {
   const isMounted = useRef(true)
 
   useEffect(() => {
+    if (isMounted.current) {
+      if (uid) {
+        setLogged(true)
+      } else {
+        setLogged(false)
+      }
+    }
     return () => {
       isMounted.current = false
     }
-  },[])
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (isMounted.current) {
-        if (user?.uid) {
-          setLogged(true)
-        } else {
-          setLogged(false)
-        }
-      }
-    })
-  }, [setLogged])
+  },[uid])
 
   const handleCloseModal = () => {
     dispatch( uiCloseModal() )
