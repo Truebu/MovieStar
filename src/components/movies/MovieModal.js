@@ -39,15 +39,9 @@ export const MovieModal = () => {
     dispatch( inactiveMovie() )
   }
 
-  const handleAddMovieCart = (e) => {// hacer metodo por el target de los botones
-    const movieInCart = findElementInArray(cart, movie?.id, logged)
-
+  const handleMovie = ({target:{name}}) => {
+    const movieInCart = findElementInArray(cart, myMovies, movie, logged, name)    
   }
-
-  const handleBuyMovie = () => {
-    
-  }
-
 
   return (
     <>
@@ -70,18 +64,20 @@ export const MovieModal = () => {
           {movie.date}
             <Button
               variant="primary"
-              onClick={handleAddMovieCart}
+              name="cart"
+              onClick={handleMovie}
             >
               Add to Cart
             </Button>
             <Button
               variant="primary"
-              onClick={ handleBuyMovie } // Notification to Client about buy (Swal)
+              name= "buy"
+              onClick={ handleMovie } // Notification to Client about buy (Swal)
             >
               Buy
             </Button>
           <Button
-            variant="secondary"
+            variant="secondary"            
             onClick={ handleCloseModal }
           >
             Close
