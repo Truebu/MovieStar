@@ -3,31 +3,13 @@ import { useDispatch } from 'react-redux'
 import { buyMovieThroughCart } from '../../actions/cart'
 import { buyMoviesWithFirebase } from '../../actions/movie'
 
-export const MovieCartItem = ({movie: {
-    id,
-    overview,
-    popularity,
-    average,
-    title,
-    imgPath,
-    date
-  },
-  isBought}) => {
+export const MovieCartItem = ({movie, isBought}) => {
 
-  const flim = {
-    id,
-    overview,
-    popularity,
-    average,
-    title,
-    imgPath,
-    date,
-  }
   const dispatch = useDispatch()
 
   const handleBuyMovie = () => {
-    dispatch(buyMoviesWithFirebase(flim))
-    dispatch(buyMovieThroughCart(flim.id))
+    dispatch(buyMoviesWithFirebase(movie))
+    dispatch(buyMovieThroughCart(movie.id))
   }
 
   return (
@@ -36,12 +18,12 @@ export const MovieCartItem = ({movie: {
         <div>
           <img
             className="cart_image"
-            src={`https://image.tmdb.org/t/p/w500${flim.imgPath}`}
-            alt={flim.title}
+            src={`https://image.tmdb.org/t/p/w500${movie.imgPath}`}
+            alt={movie.title}
           />
         </div>
         <div>
-          {flim.title}
+          {movie.title}
         </div>
         {
           isBought || 

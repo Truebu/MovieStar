@@ -60,7 +60,7 @@ export const CartScreen = () => {
           cart?.map(movie => (
             <MovieCartItem
               key={movie.movie.id}
-              {...movie}              
+              movie = {movie.movie}
             />
           ))
         }

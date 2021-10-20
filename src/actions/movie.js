@@ -1,7 +1,6 @@
 import { db } from '../firebase/firebase-config';
 import { loadMovies } from '../helpers/loadMovies';
 import { types } from '../types/types';
-import { finishLoading, startLoading } from './ui';
 
 export const movieActive = (movieInfo) => ({
   type: types.activeMovie,
@@ -21,6 +20,7 @@ export const buyAllMoviesWithFirebase = () => {
     const {cart} = getState().cart;
     const {uid} = getState().auth;
     dispatch(buyAllMovies(cart));
+    cart.map(e => e.movie.isBought = true)
     await cart.map(e => (
       db.collection(`/usuarios/${uid}/peliculas`).add(e.movie)
     ));

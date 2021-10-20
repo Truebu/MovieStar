@@ -1,6 +1,6 @@
 
-export const findElementInArray = (array, find) => {
+export const findElementInArray = (array, find) => {  
   return array.find(element => {
-    return element.movie.id === find
+    return element.movie?.id === find
   })
 }

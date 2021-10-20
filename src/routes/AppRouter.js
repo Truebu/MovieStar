@@ -26,7 +26,6 @@ export const AppRouter = () => {
   // firebase.auth().signOut()
 
   useEffect(() => {
-    
     firebase.auth().onAuthStateChanged( async(user) => {
       if (user?.uid) {
         dispatch( login( user.uid, user.displayName ))
@@ -38,7 +37,6 @@ export const AppRouter = () => {
       }
       setCheckLog( false )
     })
-
   }, [dispatch, setCheckLog, setIsLoggedIn])
 
   if (checkLog) { //pick one animation here -->

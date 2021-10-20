@@ -29,7 +29,7 @@ export const MovieModal = () => {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      if (isMounted.current) {        
+      if (isMounted.current) {
         if (user?.uid) {
           setLogged(true)
         } else {
@@ -46,7 +46,7 @@ export const MovieModal = () => {
 
   const handleAddMovieCart = () => {
     if (logged) {
-      const findElementInCart = findElementInArray(cart, movie.id)
+      const findElementInCart = findElementInArray(cart, movie?.id);
       if(!!findElementInCart){
         return toast.fire({
           icon: 'warning',
@@ -72,7 +72,7 @@ export const MovieModal = () => {
 
   const handleBuyMovie = () => {
     if (logged) {
-      const findElementInPurchasing = findElementInArray(myMovies, movie.id)
+      const findElementInPurchasing = findElementInArray(myMovies, movie.id);
       if(!!findElementInPurchasing){
         return toast.fire({
           icon: 'warning',

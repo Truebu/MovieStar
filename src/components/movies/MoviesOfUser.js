@@ -6,7 +6,7 @@ import { MovieCartItem } from '../cart/MovieCartItem'
 export const MoviesOfUser = () => {
 
   const {myMovies} = useSelector(state => state.movies)
-  
+  console.log(myMovies)
   return (
     <div className="cart_container">
     <Container>
@@ -35,7 +35,7 @@ export const MoviesOfUser = () => {
         {
           myMovies?.map(movie => (
             <MovieCartItem
-              key={movie.id}
+              key = {movie?.imgPath}
               movie = {movie}
             />
           ))
