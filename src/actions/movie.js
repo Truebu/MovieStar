@@ -23,7 +23,7 @@ export const buyAllMoviesWithFirebase = () => {
     const {uid} = getState().auth;
     dispatch(buyAllMovies(cart));    
     await cart.map(e => (
-      db.collection(`/usuarios/${uid}/peliculas`).add(e.movie)
+      db.collection(`${uid}/peliculas`).add(e.movie)
     ));
   }
 }
@@ -31,9 +31,10 @@ export const buyAllMoviesWithFirebase = () => {
 export const buyMoviesWithFirebase = (flim) => {
   return async (dispatch, getState) => {    
     dispatch(buyMovieThroughCart(flim.id))    
-    const {uid} = getState().auth;
-    await db.collection(`/usuarios/${uid}/peliculas/`).add(flim)
     dispatch(buyMovie(flim))
+    const {uid} = getState().auth;
+    await db.collection(`${uid}/user/peliculas`).add(flim)
+    await db.doc(`${uid}/user/cart/${flim.id}`).delete()
   }
 }
 
@@ -50,12 +51,12 @@ export const inactiveMovie = () => ({
   type: types.inactiveMovie
 })
 
-export const buyMovie = (movie) => ({
+const buyMovie = (movie) => ({
   type: types.buyMovie,
   payload: movie
 })
   
-export const buyAllMovies = (movies) => ({ // without Implement
+const buyAllMovies = (movies) => ({
   type: types.buyAllMovies,
   payload: movies
 })

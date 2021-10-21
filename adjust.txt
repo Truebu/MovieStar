@@ -1,11 +1,8 @@
 
 MovieModal = line 42
 if (logged) {
-      const findElementInCart = findElementInArray(cart, movie?.id);
-      if(!!findElementInCart){
-        Toast        
+      if(!!findElementInCart){       
       } else {
-        const findElementInPurchasing = findElementInArray(myMovies, movie.id)        
         if (!findElementInPurchasing) {
           dispatch(addMovieToCart(movie))
           handleCloseModal()
@@ -17,8 +14,7 @@ if (logged) {
         }
       }
     } else {
-      dispatch(uiCloseModal())
-      history.replace('/public/auth/login')
+      
     }
 
 / ======================================================/

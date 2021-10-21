@@ -1,43 +1,29 @@
 import { toast } from '../features/swalMixings';
 
-export const findElementInArray = (
-  arr1,
-  arr2,
-  movie,
-  logged,
-  tagged
-) => {
+export const findElementInArray = (arr1,arr2,movie,logged,tagged) => {
+
+  if (!logged) return 'bad login'
   
-  if (!logged) return false
-  if (tagged === 'cart') {    
+  if (tagged === 'cart') {
     const elementInArr1 = arr1.find(e => e.id === movie.id);
-    const elementInArr2 = arr2.find(e => e.id === movie.id);
-    console.log(elementInArr2);
-    if (!!elementInArr2) {
+    const elementInArr2 = arr2.find(e => e.id === movie.id);    
+    if (!!elementInArr2 || !!elementInArr1) {
       toast.fire({
         icon: 'warning',
-        title: 'Ya la tienes esta pelicula'
+        title: 'Ya la adquiriste o esta en tu carrito'
       })
-      return false
+      return 'disabled cart'
     }
-    if(!!elementInArr1){
-      toast.fire({
-        icon: 'warning',
-        title: 'Ya la tienes en el carrito'
-      })
-      return false
-    }
-    return elementInArr1
-  } else if(tagged === 'buy') {    
-    const elementInArr2 = arr2.find(e => e.id === movie.id)
+    return 'enabled cart'
+  } else if(tagged === 'buy') {
+    const elementInArr2 = arr2.find(e => e.id === movie.id)    
     if(!!elementInArr2){
       toast.fire({
         icon: 'warning',
-        title: 'Ya la Adquiriste'
+        title: 'Ya la adquiriste o esta en tu carrito'
       })
-      return false
+      return 'disabled buy'
     }
-    return elementInArr2
+    return 'enabled buy'
   }
-
 }

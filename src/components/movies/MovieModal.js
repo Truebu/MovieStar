@@ -3,8 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { addMovieToCart, buyMovieThroughCart } from "../../actions/cart";
-import { buyMovie, inactiveMovie } from "../../actions/movie";
+import { addMovieCartWithFirebase} from "../../actions/cart";
+import { buyMoviesWithFirebase, inactiveMovie } from "../../actions/movie";
 import { uiCloseModal } from "../../actions/ui";
 import { findElementInArray } from "../../helpers/findElementInArray";
 
@@ -41,6 +41,22 @@ export const MovieModal = () => {
 
   const handleMovie = ({target:{name}}) => {
     const movieInCart = findElementInArray(cart, myMovies, movie, logged, name)    
+    switch (movieInCart) {
+      case 'bad login':
+        dispatch(uiCloseModal())
+        history.replace('/public/auth/login')
+        break;      
+      case 'enabled cart':
+        dispatch(addMovieCartWithFirebase(movie))
+        handleCloseModal()
+        break;
+      case 'enabled buy':
+        dispatch(buyMoviesWithFirebase(movie))
+        handleCloseModal()
+        break;
+      default:
+        break;
+    }
   }
 
   return (

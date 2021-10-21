@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom'
 import { login } from '../actions/auth';
+import { getCart } from '../actions/cart';
 import { getMovies } from '../actions/movie';
 
 import { firebase } from '../firebase/firebase-config'
@@ -32,6 +33,7 @@ export const AppRouter = () => {
         setIsLoggedIn( true )
         // Payload more global info here -->
         dispatch(getMovies(user?.uid))
+        dispatch(getCart(user?.uid))
       } else {
         setIsLoggedIn( false )
       }

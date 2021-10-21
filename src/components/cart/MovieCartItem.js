@@ -7,7 +7,7 @@ export const MovieCartItem = ({movie}) => {
   const dispatch = useDispatch()
 
   const handleBuyMovie = () => {
-    dispatch(buyMoviesWithFirebase(movie))    
+    dispatch(buyMoviesWithFirebase(movie))
   }
 
   return (
@@ -28,7 +28,7 @@ export const MovieCartItem = ({movie}) => {
           onClick={handleBuyMovie}
         >
           Buy
-        </button>        
+        </button>
       </div>
     </>
   )
