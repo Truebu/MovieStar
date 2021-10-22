@@ -30,11 +30,10 @@ export const buyAllMoviesWithFirebase = () => {
 
 export const buyMoviesWithFirebase = (flim) => {
   return async (dispatch, getState) => {    
-    dispatch(buyMovieThroughCart(flim.id))    
-    dispatch(buyMovie(flim))
+    //dispatch(buyMovieThroughCart(flim.id))    
+    //dispatch(buyMovie(flim))
     const {uid} = getState().auth;
-    await db.collection(`${uid}/user/peliculas`).add(flim)
-    await db.doc(`${uid}/user/cart/${flim.id}`).delete()
+    //await db.collection(`${uid}/user/peliculas`).add(flim)
   }
 }
 
