@@ -26,4 +26,7 @@ export const types = {
   cartClean: '[Cart] cleanCart',
   cartMoviesLoad: '[Cart] Load Movies', // Wait for used
 
+  cartIdsCleaner: '[Cart] clen ides',
+  cartIdClean: '[Cart] clean one id'
+
 }

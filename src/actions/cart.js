@@ -1,7 +1,6 @@
 import { types } from "../types/types";
 import { db } from '../firebase/firebase-config';
 import { loadMovies } from "../helpers/loadMovies";
-import { firebaseQueris } from "../helpers/fireBaseQuerys";
 
 export const addMovieCartWithFirebase = (movie) => {
   return async (dispatch, getState) => {
@@ -12,13 +11,12 @@ export const addMovieCartWithFirebase = (movie) => {
 }
 
 export const getCart = (uid) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+   const {uid} = getState().auth;
    const cart = await loadMovies('cart', uid);
-   const idCart = await firebaseQueris(uid, 'cart'); // for implement
-   /* cart.map(e => (
+   cart.map(e => (
     dispatch(addMovieToCart(e))
-   )) */
-   console.log(idCart);
+   ))
   }
 }
 

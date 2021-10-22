@@ -3,6 +3,7 @@ import { loadMovies } from '../helpers/loadMovies';
 import { types } from '../types/types';
 import { finishLoading, startLoading } from './ui';
 import {buyMovieThroughCart} from './cart';
+import { firebaseQueris } from "../helpers/fireBaseQuerys";
 
 export const movieActive = (movieInfo) => ({
   type: types.activeMovie,
@@ -29,11 +30,17 @@ export const buyAllMoviesWithFirebase = () => {
 }
 
 export const buyMoviesWithFirebase = (flim) => {
-  return async (dispatch, getState) => {    
-    //dispatch(buyMovieThroughCart(flim.id))    
-    //dispatch(buyMovie(flim))
+  return async (dispatch, getState) => {
     const {uid} = getState().auth;
-    //await db.collection(`${uid}/user/peliculas`).add(flim)
+    const docId = await firebaseQueris(uid, 'cart', flim.id);
+    dispatch(buyMovie(flim))
+    if (!(docId === '')) {
+      dispatch(buyMovieThroughCart(flim.id))
+      db.collection(`${uid}/user/cart`).doc(`${docId}`).delete().then(()=>{
+        console.log('eliminado');
+      })
+    }
+    await db.collection(`${uid}/user/peliculas`).add(flim)
   }
 }
 
