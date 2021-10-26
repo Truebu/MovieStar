@@ -19,12 +19,22 @@ export const movieActive = (movieInfo) => ({
 })
 
 export const buyAllMoviesWithFirebase = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch, getState) => {// Start Loading
     const {cart} = getState().cart;
     const {uid} = getState().auth;
-    dispatch(buyAllMovies(cart));    
-    await cart.map(e => (
-      db.collection(`${uid}/peliculas`).add(e.movie)
+    const idCarts = []
+    cart.forEach(e => {
+      idCarts.push(e.id)
+    })
+    dispatch(buyAllMovies(cart));
+    await cart.forEach((movie) => (
+      db.collection(`${uid}/user/peliculas`).add(movie)
+    ));
+    const docsId = await firebaseQueris(uid, 'cart', idCarts);
+    docsId.map( (e) => (
+      db.collection(`${uid}/user/cart`).doc(`${e}`).delete().then(()=>{
+        console.log('eliminado'); // FinishLoading (Alerta de compradas!)
+      })
     ));
   }
 }
@@ -32,15 +42,15 @@ export const buyAllMoviesWithFirebase = () => {
 export const buyMoviesWithFirebase = (flim) => {
   return async (dispatch, getState) => {
     const {uid} = getState().auth;
-    const docId = await firebaseQueris(uid, 'cart', flim.id);
+    const docId = await firebaseQueris(uid, 'cart', [flim.id]);
     dispatch(buyMovie(flim))
-    if (!(docId === '')) {
+    if (!(docId[0] === '')) {
       dispatch(buyMovieThroughCart(flim.id))
-      db.collection(`${uid}/user/cart`).doc(`${docId}`).delete().then(()=>{
+      db.collection(`${uid}/user/cart`).doc(`${docId[0]}`).delete().then(()=>{
         console.log('eliminado');
       })
     }
-    await db.collection(`${uid}/user/peliculas`).add(flim)
+    await db.collection(`${uid}/user/peliculas`).add(flim);
   }
 }
 

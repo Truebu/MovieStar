@@ -16,7 +16,7 @@ export const CartScreen = () => {
   },[])
 
   const handleBuyAllMovies = () => {    
-    dispatch(buyAllMoviesWithFirebase())    
+    dispatch(buyAllMoviesWithFirebase())
     dispatch(cartClean())
   }
 
@@ -45,7 +45,7 @@ export const CartScreen = () => {
         <Col>
           <button
             className="btn btn-success"
-            onClick={handleBuyAllMovies} // add confirm purchased and validation when cart.lenght === 0
+            onClick={handleBuyAllMovies} // add confirm purchased and validation when cart.lenght === 0 || Also iniciar carga 
           >
             Buy All
           </button>
