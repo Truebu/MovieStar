@@ -1,11 +1,13 @@
 import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import { MoviePurchased } from '../user_storage/MoviesPurchased'
 
 export const MoviesOfUser = () => {
 
   const {myMovies} = useSelector(state => state.movies)
+  const history = useHistory()
 
   return (
     <div className="cart_container">
@@ -20,12 +22,18 @@ export const MoviesOfUser = () => {
       <hr />
       <Row>
         <Col>
-          <button className="btn btn-primary">
-            Regresar
+          <button
+            className="btn btn-primary"
+            onClick={ () => history.push('/private/home')}
+          >
+            Home
           </button>
         </Col>
         <Col>
-          <button className="btn btn-primary">
+          <button
+            className="btn btn-primary"
+            onClick={ () => history.push('/private/cart')}
+          >
             Your Cart
           </button>
         </Col>

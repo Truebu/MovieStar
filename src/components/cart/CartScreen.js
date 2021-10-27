@@ -4,20 +4,28 @@ import { useDispatch, useSelector } from 'react-redux'
 import { cartClean } from '../../actions/cart'
 import { buyAllMoviesWithFirebase } from '../../actions/movie'
 
+import { useHistory } from 'react-router-dom';
+
 import { MovieCartItem } from './MovieCartItem'
 
 export const CartScreen = () => {
   
   const {cart} = useSelector(state => state.cart)
   const dispatch = useDispatch()
+  const history = useHistory()
+  const {loading} = useSelector(state => state.ui)
   
   useEffect(() => {
     
   },[])
 
-  const handleBuyAllMovies = () => {    
+  const handleBuyAllMovies = () => {
     dispatch(buyAllMoviesWithFirebase())
     dispatch(cartClean())
+  }
+
+  if (loading) {
+    return <div className="lds-hourglass"></div>
   }
 
   return (
@@ -33,19 +41,26 @@ export const CartScreen = () => {
       <hr />
       <Row>
         <Col>
-          <button className="btn btn-primary">
-            Regresar
+          <button
+            className="btn btn-primary"
+            onClick={ () => history.push('/private/home')}
+          >
+            Home
           </button>
         </Col>
         <Col>
-          <button className="btn btn-primary">
+          <button
+            className="btn btn-primary"
+            onClick={ () => history.push('/private/userMovies')}
+          >
             Your Movies
           </button>
         </Col>
         <Col>
           <button
             className="btn btn-success"
-            onClick={handleBuyAllMovies} // add confirm purchased and validation when cart.lenght === 0 || Also iniciar carga 
+            onClick={handleBuyAllMovies} // add confirm purchased and validation when cart.lenght === 0 || Also iniciar carga
+            disabled = {(cart.length < 2) ?true :false}
           >
             Buy All
           </button>

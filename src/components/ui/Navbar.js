@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { startLogout } from '../../actions/auth';
 import { cartClean } from '../../actions/cart';
+import { toast } from '../../features/swalMixings';
 
 export const Navbar = ({setQuerys}) => {
 
@@ -13,13 +14,16 @@ export const Navbar = ({setQuerys}) => {
   // Handle Search Peticion
   const [forms, setForms] = useState("")
   const baseUrl = '/search/movie'
-  const handleSearchChange = ({target}) => { // Se debe controlar cuando el user no envia nada
+  const handleSearchChange = ({target}) => {
     setForms(target.value)
   }
   const handleSearch = (e) => {
     e.preventDefault()
     if (forms === '') {
-      console.log('object to Navbar') // Swal for show add you should added elsewhare in your find
+      toast.fire({
+        icon: 'warning',
+        title: 'Agrega algo a tu busqueda'
+      })
     } else {
       setQuerys(newQuerys => ({
         ...newQuerys,
@@ -55,7 +59,7 @@ export const Navbar = ({setQuerys}) => {
     }
   },[uid])
   
-  return (
+  return (//StartLoading
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <button
         className="navbar-toggler"
@@ -120,7 +124,7 @@ export const Navbar = ({setQuerys}) => {
               LogOut
             </button>
             <button
-              className="btn btn-outline-success my-2 my-sm-0" // Props History para redirigir al componente Mis Peliculas
+              className="btn btn-outline-success my-2 my-sm-0"
               onClick={ () => history.push('/private/userMovies')}
             >            
               Your Movies            

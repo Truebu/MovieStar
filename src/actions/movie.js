@@ -19,7 +19,8 @@ export const movieActive = (movieInfo) => ({
 })
 
 export const buyAllMoviesWithFirebase = () => {
-  return async (dispatch, getState) => {// Start Loading
+  return async (dispatch, getState) => {
+    dispatch(startLoading())
     const {cart} = getState().cart;
     const {uid} = getState().auth;
     const idCarts = []
@@ -31,23 +32,21 @@ export const buyAllMoviesWithFirebase = () => {
       db.collection(`${uid}/user/peliculas`).add(movie)
     ));
     const docsId = await firebaseQueris(uid, 'cart', idCarts);
-    docsId.map( (e) => (
-      db.collection(`${uid}/user/cart`).doc(`${e}`).delete().then(()=>{
-        console.log('eliminado'); // FinishLoading (Alerta de compradas!)
-      })
-    ));
+    docsId.map( (e) => (db.collection(`${uid}/user/cart`).doc(`${e}`).delete().then(()=>{})));
+    dispatch(finishLoading())
   }
 }
 
 export const buyMoviesWithFirebase = (flim) => {
   return async (dispatch, getState) => {
+    dispatch(startLoading())
     const {uid} = getState().auth;
     const docId = await firebaseQueris(uid, 'cart', [flim.id]);
     dispatch(buyMovie(flim))
     if (!(docId[0] === '')) {
       dispatch(buyMovieThroughCart(flim.id))
       db.collection(`${uid}/user/cart`).doc(`${docId[0]}`).delete().then(()=>{
-        console.log('eliminado');
+        dispatch(finishLoading())
       })
     }
     await db.collection(`${uid}/user/peliculas`).add(flim);

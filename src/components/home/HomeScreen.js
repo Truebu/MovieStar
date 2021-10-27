@@ -28,7 +28,7 @@ export const HomeScreen = () => {
   
   
   if (loading) {
-    return <h1>... wait</h1>
+    return <div className="lds-hourglass"></div>
   }
 
   return (
@@ -40,7 +40,7 @@ export const HomeScreen = () => {
         <div className="home_Genders">
           <NavGenders setQuerys={setQuerys}/>
         </div>
-      </div>      
+      </div>
       <div className="home_container_movies">
         {
           (!loading) &&

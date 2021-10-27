@@ -43,7 +43,7 @@ export const AppRouter = () => {
 
   if (checkLog) { //pick one animation here -->
     return(
-      <h1>wait ... </h1>
+      <div className="lds-hourglass"></div>
     )
   }
 
