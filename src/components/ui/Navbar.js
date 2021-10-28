@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { startLogout } from '../../actions/auth';
 import { cartClean } from '../../actions/cart';
+import { cleanMovies } from '../../actions/movie';
 import { toast } from '../../features/swalMixings';
 
 export const Navbar = ({setQuerys}) => {
@@ -39,6 +40,7 @@ export const Navbar = ({setQuerys}) => {
   const handleLogout = () => {
     dispatch(startLogout())
     dispatch(cartClean())
+    dispatch(cleanMovies())
   };
 
 
@@ -59,7 +61,7 @@ export const Navbar = ({setQuerys}) => {
     }
   },[uid])
   
-  return (//StartLoading
+  return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <button
         className="navbar-toggler"

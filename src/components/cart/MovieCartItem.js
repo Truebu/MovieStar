@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2'
 import { buyMoviesWithFirebase } from '../../actions/movie'
 
 export const MovieCartItem = ({movie}) => {
@@ -8,6 +9,13 @@ export const MovieCartItem = ({movie}) => {
 
   const handleBuyMovie = () => {
     dispatch(buyMoviesWithFirebase(movie))
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Pelicula Comprada',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
   return (

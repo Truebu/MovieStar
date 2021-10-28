@@ -20,6 +20,9 @@ export const userStorageReducer = (state = initialState, action) => {
         myMovies: [...state.myMovies, ...action.payload]
       }
     
+    case  types.cleanMovies:
+      return initialState;
+
     default:
       return state
   }

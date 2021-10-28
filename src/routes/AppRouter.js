@@ -41,7 +41,7 @@ export const AppRouter = () => {
     })
   }, [dispatch, setCheckLog, setIsLoggedIn])
 
-  if (checkLog) { //pick one animation here -->
+  if (checkLog) {
     return(
       <div className="lds-hourglass"></div>
     )

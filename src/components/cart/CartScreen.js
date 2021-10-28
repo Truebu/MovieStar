@@ -7,6 +7,7 @@ import { buyAllMoviesWithFirebase } from '../../actions/movie'
 import { useHistory } from 'react-router-dom';
 
 import { MovieCartItem } from './MovieCartItem'
+import Swal from 'sweetalert2'
 
 export const CartScreen = () => {
   
@@ -20,8 +21,28 @@ export const CartScreen = () => {
   },[])
 
   const handleBuyAllMovies = () => {
-    dispatch(buyAllMoviesWithFirebase())
-    dispatch(cartClean())
+    Swal.fire({// Posible Refactorizacion
+      title: '¿Quieres comprar todo tu carrito?',
+      text: "Estas apunto de comprar todas tus peliculas",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Las quiero!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(buyAllMoviesWithFirebase())
+        dispatch(cartClean())
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Compradas',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        history.push('/private/userMovies')
+      }
+    })
   }
 
   if (loading) {
@@ -59,7 +80,7 @@ export const CartScreen = () => {
         <Col>
           <button
             className="btn btn-success"
-            onClick={handleBuyAllMovies} // add confirm purchased and validation when cart.lenght === 0 || Also iniciar carga
+            onClick={handleBuyAllMovies}
             disabled = {(cart.length < 2) ?true :false}
           >
             Buy All

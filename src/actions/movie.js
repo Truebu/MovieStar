@@ -75,3 +75,7 @@ const buyAllMovies = (movies) => ({
   type: types.buyAllMovies,
   payload: movies
 })
+
+export const cleanMovies = () => ({
+  type: types.cleanMovies
+})

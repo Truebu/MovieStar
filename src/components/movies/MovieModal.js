@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 import { addMovieCartWithFirebase} from "../../actions/cart";
 import { buyMoviesWithFirebase, inactiveMovie } from "../../actions/movie";
 import { uiCloseModal } from "../../actions/ui";
@@ -53,6 +54,13 @@ export const MovieModal = () => {
       case 'enabled buy':
         dispatch(buyMoviesWithFirebase(movie))
         handleCloseModal()
+        Swal.fire({ // Posible Refactorizacion
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
         break;
       default:
         break;
@@ -88,7 +96,7 @@ export const MovieModal = () => {
             <Button
               variant="primary"
               name= "buy"
-              onClick={ handleMovie } // Notification to Client about buy (Swal)
+              onClick={ handleMovie }
             >
               Buy
             </Button>

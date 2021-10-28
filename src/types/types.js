@@ -19,6 +19,7 @@ export const types = {
   buyMovie: '[Movie] Buy Movie',
   moviesLoad: '[Movie] Load Movies',
   buyAllMovies: '[Movie] buy all movies in the cart',
+  cleanMovies: '[Movie] clean all movies',
   
   buyMovieThroughCart:'[Cart] buyMovieThroughCart' ,
   cartAddMovie: '[Cart] addCartMovie',
