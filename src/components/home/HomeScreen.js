@@ -32,14 +32,12 @@ export const HomeScreen = () => {
   }
 
   return (
-    <div className="home_container">
-      <div className="home_navbars">
-        <div className="controler_navbar">
-          <Navbar setQuerys={setQuerys}/>
-        </div>
-        <div className="home_Genders">
-          <NavGenders setQuerys={setQuerys}/>
-        </div>
+    <>
+      <div className="home_topbar">
+        <Navbar setQuerys={setQuerys}/>
+      </div>
+      <div className="">
+        <NavGenders setQuerys={setQuerys}/>
       </div>
       <div className="home_container_movies">
         {
@@ -64,6 +62,6 @@ export const HomeScreen = () => {
       <div>
         <MovieModal />
       </div>
-    </div>
+    </>
   )
 }

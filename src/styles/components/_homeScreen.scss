@@ -1,20 +1,25 @@
-
-
-.home_container{
-  
+.home_topbar {
+  padding: 15px 15px;
+  align-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.home_navbars{
-  
+.home_topbar-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
 }
-/* .controler_navbar{
-  
-}
-.home_Genders{
-  
-}
- */
 
+
+.home_topbar-user {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+// Movie Container
 .home_container_movies{
   background: linear-gradient(140deg, #2dc9dd, $dark);
   display: grid;
@@ -24,6 +29,19 @@
   justify-content: center;
 }
 
-.home_movies {
-  
+.site-layout-content {
+  min-height: 280px;
+  padding: 24px;
+  background: #fff;
+}
+#components-layout-demo-top .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
+}
+.ant-row-rtl #components-layout-demo-top .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
 }
