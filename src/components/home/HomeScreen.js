@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import { Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { apiMovieAsync, apiReload } from '../../actions/api'
 import { MovieModal } from '../movies/MovieModal'
